@@ -1,0 +1,88 @@
+Задача 3 — Дублирани букви
+Дава ни се текстовия низ S. Целта на задачата е да се премахнат всички специални дубликати в него.
+Специален дубликат казваме на две едни и същи поредни букви (например: aa; qq).
+Премахването на един специален дубликат се счита за една операция. 
+След като премахнете всички възможни специални дубликати от низа S, 
+отпечатайте остатъчния низ и необходимия брой операции, за да се стигне до него, 
+като ако остатъчният низ е празен, изпечатваме "Empty String" вместо него.
+Вход
+•	Входът се чете от конзолата, на първия ред получаваме низът S за обработка.
+Изход
+•	На първия ред трябва да се отпечата остатъчния низ S след премахването на специалните дубликати в него.
+•	На втория ред трябва да се отпечата броя операции които сме извършили за да стигнем до крайния резултат 
+  в следната форма "N operations", където N е броят операции.
+Ограничения
+•	Буквите в низът S винаги ще са малки латински букви в диапазона [a-z].
+•	S ще има дължина в диапазона [1…10000].
+•	Позволено време: 100 мс. Позволена памет: 16 MB.
+Примерен вход и изход
+Вход		
+abaabccc
+Изход
+----------
+ac
+3 operations
+____________________
+Коментари
+Започваме със низът abaabccc, премахваме първият намерен специален дубликат aa.
+Остава ни низът abbccc, разглеждайки го виждаме следващият специален дубликат bb,
+след премахването получаваме текстът accc, махайки и последният специален дубликат cc, получавме резултатът ac.
+abaabccc -> abbccc -> accc -> ac
+За да стигнем до крайният резултат извършихме 3 операции (премахвания).
+
+Input
+baabccdd	
+
+Изход
+-------------
+Empty String
+4 operations
+
+
+package darik;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Darik {
+	   static int count = 0;
+	   public static void main(String[] args) {
+		   
+		     Scanner scan = new Scanner(System.in);
+			 String S = scan.nextLine();
+			 scan.close();
+			 
+			 
+			 char[] array = S.toCharArray();
+			 ArrayList<Character> al = new ArrayList<Character>();			 
+			 for (int i = 0; i < array.length; i++) {
+				al.add(array[i]);
+			}
+			 clearAl(al, al.size());
+			if(al.isEmpty()) {
+				System.out.print("Empty String");
+			} else {
+				for (Character character : al) {
+					System.out.print(character);						
+			  }
+			}
+			
+			System.out.println("\n" + count + " operations");
+			
+	}
+	   
+	private static ArrayList<Character> clearAl(ArrayList<Character> al, int size) {
+		  
+				for (int i = 0; i < size-1; i++) {
+					if(al.get(i) == al.get(i + 1)) {
+						al.remove(i);
+						al.remove(i);
+						count++;
+						return clearAl(al, al.size());
+					}
+				}			
+		        return al;
+	}
+
+}
+
