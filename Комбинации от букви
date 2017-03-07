@@ -1,0 +1,51 @@
+Комбинации от букви
+Напишете програма, която да принтира на конзолата всички комбинации от 3 букви в зададен интервал,
+като се пропускат комбинациите съдържащи зададена от конзолата буква.
+Накрая трябва да се изпринтира броят на отпечатаните комбинации.
+Вход
+Входът се чете от конзолата и съдържа точно 3 реда:
+Ред 1.	Малка буква от английската азбука за начало на интервала – от ‘a’ до ‚z’.
+Ред 2.	Малка буква от английската азбука за край на интервала  – от първата буква до ‚z’.
+Ред 3.	Малка буква от английската азбука – от ‘a’ до ‚z’ – като комбинациите съдържащи тази буквата се пропускат.
+Изход
+Да се отпечатат на един ред всички комбинации отговарящи на условието плюс броят им разделени с интервал.
+Примерен вход и изход
+Вход		
+a
+c
+b	
+Изход
+aaa aac aca acc caa cac cca ccc 8	
+Обяснения
+Всички възможни комбинации с буквите a, b, и c са:
+aaa aab aac aba abb abc aca acb acc baa bab bac bba bbb bbc bca bcb bcc caa cab cac cba cbb cbc cca ccb ccc
+Комбинациите съдържащи b не са валидни.
+Остават 8 валидни комбинации
+
+
+import java.util.Scanner;
+
+public class exam {
+
+	public static void main(String[] args) {
+		
+		Scanner scan = new Scanner(System.in);
+		char char1 = scan.next().charAt(0);
+		char char2 = scan.next().charAt(0);
+		char char3 = scan.next().charAt(0);
+		scan.close();
+		
+		int count = 0;
+		for (char i1 = char1; i1 <= char2; i1++) {
+			for (char i2 = char1; i2 <= char2; i2++) {				
+				for (char i3 = char1; i3 <= char2; i3++) {
+					if(i1 != char3 && i2 != char3 && i3 != char3) {					
+						count++;					
+						System.out.printf("%s%s%s ", i1, i2, i3);
+					}
+				}
+			}
+		}
+		System.out.print(count);
+		}
+    }
