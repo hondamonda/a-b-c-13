@@ -1,0 +1,81 @@
+Days to Apply at Software University
+Problem Definition
+Currently Software University is accepting applications for the spring semester.
+These applications have fast approaching deadline. 
+After the deadline a new introductory course Programming Basics is starting to 
+ensure the candidates are well prepared for the entry exam on 28th April 2015.
+Write a program that reads from the console the name of the user and prints a message,
+notifying him how many days he has left for application for the spring semester at Software University. 
+The days should be printed in binary representation of the number.
+Input
+The input will be a single line, holding the name of the user.
+Output
+The output should consists of a single line, holding the string: 
+"{name}, you have only {binaryDays} days to apply for the spring semester at Software University!".
+ {name} is the name of the user, read from the console.
+ {binaryDays} is the binary representation of the number of days left for application for the spring semester at Software University.
+Constraints
+ The input will always be a single line;
+ Time limit: 0.1 sec. Memory limit: 16 MB.
+Example
+Note: Below is a sample pair of input and output strings as if today is 1st January 2015. 
+
+Input Ivan 
+
+Output Ivan, you have only 1010010 days to apply for the spring semester at Software University!
+
+
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.Scanner;
+
+public class exam {
+	
+	public static void main(String... args) {
+
+		Scanner scan = new Scanner(System.in);
+		String name = scan.nextLine();
+		scan.close();
+		//first Date
+		LocalDate examDate = LocalDate.of(2017, 4, 17);
+		//second Date
+		LocalDate currentDate = LocalDate.now();
+		//Calculates the period between first date and second date in DAYS
+		long period = currentDate.until(examDate, ChronoUnit.DAYS);
+		//convert Long to binary
+		String binaryPeriod = Long.toBinaryString(period);
+		
+		System.out.printf(
+				"%s, you have only %s days to apply for the spring "
+				+ "semester at Software University!", name, binaryPeriod);
+		
+	}
+}
+
+000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+
+
+package zad;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+
+public class Zad {
+
+	public static void main(String[] args) throws IOException {
+
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MM yyyy");
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		String firstInput = br.readLine();
+		String secondInput = br.readLine();
+		LocalDate firstDate = LocalDate.parse(firstInput, formatter);
+		LocalDate secondDate = LocalDate.parse(secondInput, formatter);
+		long days = ChronoUnit.DAYS.between(firstDate, secondDate);
+		System.out.println("Days between: " + days);
+	}
+}
+
